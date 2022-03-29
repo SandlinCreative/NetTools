@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EndpointViewer
+namespace Pinger
 {
-	public class IPEnumeration : IEnumerable
+    public class IPEnumeration : IEnumerable
 	{
 		private string startAddress;
 		private string endAddress;

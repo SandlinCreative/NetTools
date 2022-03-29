@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pinger"
         mc:Ignorable="d"
-        Title="Pinger" Height="450" Width="800" WindowStyle="None">
+        Title="Pinger" Height="450" Width="629" WindowStyle="None">
     
     <!--Add the WindowChrome object-->
     <WindowChrome.WindowChrome>
@@ -15,48 +15,10 @@
     <!--Add Style Resources-->
     <Window.Resources>
         <ResourceDictionary>
-
-            <!--Base style for title bar buttons-->
-            <Style x:Key="CaptionButtonStyle" TargetType="Button">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" Height="30">
-                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="10" 
-                                   Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   RenderOptions.ClearTypeHint="Auto" TextOptions.TextRenderingMode="Aliased"  TextOptions.TextFormattingMode="Display"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="LayoutRoot" Property="Background" Value="#E5E5E5"/>
-                                    <Setter TargetName="txt" Property="Foreground" Value="#000000"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!--Minimize-->
-            <Style x:Key="MinimizeButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-                <Setter Property="Content" Value="&#xE949;"/>
-            </Style>
-
-            <!--Maximize-->
-            <Style x:Key="MaximizeButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-                <Setter Property="Content" Value="&#xE739;"/>
-            </Style>
-
-            <!--Restore-->
-            <Style x:Key="RestoreButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-                <Setter Property="Content" Value="&#xE923;"/>
-            </Style>
-
-            <!--Close-->
-            <Style x:Key="CloseButtonStyle" TargetType="Button" BasedOn="{StaticResource CaptionButtonStyle}">
-                <Setter Property="Content" Value="&#xE106;"/>
-            </Style>
-
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="DataGridStyles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     
@@ -69,7 +31,7 @@
     </Window.CommandBindings>
 
     <Border x:Name="MainWindowBorder" BorderBrush="LightCoral" BorderThickness="0" >
-        <Grid x:Name="parentContainer" Background="#FF202020">
+        <Grid x:Name="parentContainer" Background="#FF292929">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height ="Auto"/>
@@ -81,7 +43,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <!--App icon-->
                     <!--<Image Source="/Resources/watermelon.ico" Width="18" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" />-->
-                    <TextBlock Text="NetPinger" FontFamily="Inconsolata Medium" Margin="8,3,0,0" Foreground="White" />
+                    <TextBlock Text="NetPinger" FontFamily="Inconsolata Medium" Margin="12,3,0,0" Foreground="White" />
                 </StackPanel>
 
                 <!--Caption buttons-->
@@ -98,8 +60,20 @@
             </Grid>
 
             <!--App content-->
-            <Grid Grid.Row="1" x:Name="AppArea" Background="#FF292929">
-                
+            <Grid Grid.Row="1" x:Name="AppArea" Margin="7,7,7,7">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="First IP" />
+                    <TextBox x:Name="txt_ip1" TextWrapping="Wrap" Text="TextBox" Width="120" />
+                    <Label Content="Last IP" />
+                    <TextBox x:Name="txt_ip2" TextWrapping="Wrap" Text="TextBox" Width="120" />
+                    <Button x:Name="btn_scan" Content="SCAN" />
+                </StackPanel>
+                <DataGrid x:Name="dg_result" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" />
+
             </Grid>
 
         </Grid>
